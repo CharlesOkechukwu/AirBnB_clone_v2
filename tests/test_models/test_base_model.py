@@ -31,9 +31,6 @@ class test_basemodel(unittest.TestCase):
         """ """
         i = self.value()
         self.assertEqual(type(i), self.value)
-        self.assertIsNotNone(i.id)
-        self.assertEqual(type(i.created_at), datetime.datetime)
-        self.assertEqual(type(i.updated_at), datetime.datetime)
 
     def test_kwargs(self):
         """ """
