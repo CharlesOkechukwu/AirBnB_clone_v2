@@ -83,6 +83,7 @@ class test_basemodel(unittest.TestCase):
     def test_id(self):
         """ """
         new = self.value()
+        self.assertIsNone(new.id)
         self.assertEqual(type(new.id), str)
 
     def test_created_at(self):
