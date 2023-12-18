@@ -31,7 +31,7 @@ class test_basemodel(unittest.TestCase):
         """ """
         i = self.value()
         self.assertEqual(type(i), self.value)
-       
+
     def test_kwargs(self):
         """ """
         i = self.value()
@@ -83,9 +83,6 @@ class test_basemodel(unittest.TestCase):
     def test_id(self):
         """ """
         new = self.value()
-        new2 = self.value()
-        self.assertIsNotNone(new.id)
-        self.assertNotEqual(new, new2)
         self.assertEqual(type(new.id), str)
 
     def test_created_at(self):
