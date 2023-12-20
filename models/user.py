@@ -20,5 +20,5 @@ class User(BaseModel, Base):
     reviews = relationship(
         'Review',
         back_populates='user',
-        cascade='all, delete-orphan'
+        cascade='all, delete-orphan',
         )
