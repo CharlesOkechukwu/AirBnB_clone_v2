@@ -10,7 +10,7 @@ class State(BaseModel, Base):
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
     city = relationship(
-        'states',
+        'City',
         back_populates='state',
         cascade='all, delete-orphan'
         )
@@ -19,4 +19,4 @@ class State(BaseModel, Base):
     def cities(self):
         """ returns the list of City instances with
         state_id equals to the current State.id"""
-        return self.city
+        return list(self.city)
