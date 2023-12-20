@@ -13,7 +13,7 @@ class FileStorage:
         if cls is not None:
             temp = {}
             for key, obj in self.__objects.items():
-                if type(obj) == cls:
+                if type(obj) is cls:
                     temp[key] = obj
             return temp
         else:
@@ -59,10 +59,8 @@ class FileStorage:
     def delete(self, obj=None):
         """deletes obj from __objects if it’s inside.
         if obj is equal to None, the method does nothing
-        Arguments:
-            obj : object to be deleted
         """
-
-        key = obj.__class__.__name__ + '.' + obj.id
-        if key in self.__objects.keys():
-            del self.__objects[key]
+        if obj is not None:
+            key = obj.__class__.__name__ + '.' + obj.id
+            if key in self.__objects.keys():
+                del self.__objects[key]
