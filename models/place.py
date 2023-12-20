@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey, Integer, Float
 from sqlalchemy.orm import relationship
 
 
-class Place(BaseModel):
+class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = "places"
     city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
@@ -27,11 +27,11 @@ class Place(BaseModel):
         cascade='all, delete-orphan'
         )
 
-    @property
-    def reviews(self):
-        """
-        returns the list of Review instances with place_id equals
-        to the current Place.id. It will be the FileStorage
-        relationship between Place and Review
-        """
-        return list(self.reviews)
+    # @property
+    # def review(self):
+    #     """
+    #     returns the list of Review instances with place_id equals
+    #     to the current Place.id. It will be the FileStorage
+    #     relationship between Place and Review
+    #     """
+    #     return list(self.reviews)
