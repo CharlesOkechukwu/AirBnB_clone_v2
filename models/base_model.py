@@ -12,9 +12,9 @@ Base = declarative_base()
 
 class BaseModel:
     """A base class for all hbnb models"""
-    # id = Column(String(60), primary_key=True, nullable=False)
-    # created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
-    # updated_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
+    id = Column(String(60), primary_key=True, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
+    updated_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
 
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
@@ -41,8 +41,11 @@ class BaseModel:
 
     def __str__(self):
         """Returns a string representation of the instance"""
+        temp_dict = self.__dict__.copy()
+        if "_sa_instance_state" in temp_dict.keys():
+            del temp_dict["_sa_instance_state"]
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
-        return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
+        return '[{}] ({}) {}'.format(cls, self.id, temp_dict)
 
     def save(self):
         """Updates updated_at with current time when instance is changed"""
@@ -59,10 +62,10 @@ class BaseModel:
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
-        # if _sa_instance_state in dictionary.keys():
-        #     del dictionary[_sa_instance]
+        if "_sa_instance_state" in dictionary.keys():
+            del dictionary["_sa_instance_state"]
         return dictionary
 
-    # def delete(self):
-    #     """Delete instance from storage"""
-    #     storage.delete(self)
+    def delete(self):
+        """Delete instance from storage"""
+        storage.delete(self)
