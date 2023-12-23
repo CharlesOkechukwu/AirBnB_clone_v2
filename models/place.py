@@ -26,6 +26,7 @@ class Place(BaseModel, Base):
         back_populates='place',
         cascade='all, delete-orphan'
         )
+    # place_amenity = relationship("Amenity", secondary="amenities", back_populates="place_amenities", )
 
     # @property
     # def reviews(self):
