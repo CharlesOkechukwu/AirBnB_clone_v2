@@ -32,6 +32,7 @@ class DBStorage:
         self.__engine = create_engine(conn, pool_pre_ping=True)
         if getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
+        Base.metadata.create_all(self.__engine)
 
     def all(self, cls=None):
         """return all data in a table about a class or all classes"""
