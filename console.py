@@ -3,7 +3,7 @@
 import cmd
 import sys
 from models.base_model import BaseModel
-from models.__init__ import storage
+from models import storage
 from models.user import User
 from models.place import Place
 from models.state import State
@@ -33,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
     def preloop(self):
         """Prints if isatty is false"""
         if not sys.__stdin__.isatty():
-            print('(hbnb)')
+            print('(hbnb)', end="")
 
     def precmd(self, line):
         """Reformat command line for advanced command syntax.
@@ -136,9 +136,8 @@ class HBNBCommand(cmd.Cmd):
                 continue
             if hasattr(new_instance, key):
                 setattr(new_instance, key, value)
-        storage.save()
+        new_instance.save()
         print(new_instance.id)
-        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
@@ -214,17 +213,20 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
         print_list = []
+        arg = None
 
         if args:
-            args = args.split(' ')[0]  # remove possible trailing args
-            if args not in HBNBCommand.classes:
+            arg = args.split(' ')[0]  # remove possible trailing args
+            if arg not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
-                if k.split('.')[0] == args:
+            obj = storage.all(arg)
+            for k, v in obj.items():
+                if k.split('.')[0] == arg:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            obj = storage.all()
+            for k, v in obj.items():
                 print_list.append(str(v))
 
         print(print_list)
