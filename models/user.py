@@ -24,8 +24,8 @@ class User(BaseModel, Base):
             back_populates='user',
             cascade='all, delete-orphan'
             )
-    else:
-        email = ''
-        password = ''
-        first_name = ''
-        last_name = ''
+    # else:
+    #     email = ''
+    #     password = ''
+    #     first_name = ''
+    #     last_name = ''
