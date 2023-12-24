@@ -17,10 +17,10 @@ class City(BaseModel, Base):
     if getenv("HBNB_TYPE_STORAGE") == "db":
         state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
         name = Column(String(128), nullable=False)
-        state = relationship('State', back_populates='cities')
+        state = relationship('State', backref='cities')
         places = relationship(
             'Place',
-            back_populates='cities',
+            backref='cities',
             cascade='all, delete-orphan'
             )
     else:
