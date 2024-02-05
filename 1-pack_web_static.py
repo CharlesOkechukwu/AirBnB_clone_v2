@@ -16,7 +16,7 @@ def do_pack():
     if not path.isdir("versions"):
         if local("mkdir versions").failed:
             return None
-    cmd = "tar -cvzf {} web_static".format(arch)
+    cmd = "cd web_static && tar -cvzf ../{} . && cd ..".format(arch)
     if local(cmd).failed is True:
         return None
     return arch
