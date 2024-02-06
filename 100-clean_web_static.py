@@ -23,8 +23,8 @@ def do_clean(number=0):
             local("rm -f {}".format(folder))
 
     with cd("/data/web_static/releases"):
-        folders = run("ls -td web_static_*")
-        f_list = folders.split()
-        old = f_list[number:]
-        for folder in old:
-            run("rm -rf {}".format(folder))
+        folders = run("ls -tr web_static_*")
+        full_list = folders.split()
+        old = full_list[number:]
+        for folder_ in old:
+            run("rm -rf {}".format(folder_))
