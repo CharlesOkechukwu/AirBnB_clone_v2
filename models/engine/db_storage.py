@@ -1,4 +1,4 @@
-#!usr/bin/python3
+#!/usr/bin/python3
 """Module for the database storage engine for AirBnB project"""
 from models.base_model import BaseModel, Base
 from models.user import User
